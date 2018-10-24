@@ -2,10 +2,10 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import morgan from 'morgan'
-import passport from 'passport'
+// import passport from 'passport'
 // import keys from './config/keys'
 import config from './config/mainConfig'
-import apollo from './apollo/index'
+import apollo from './graphql/index'
 // import routes from './routes'
 // import middlewarePasport from './middleware/passport'
 
@@ -22,7 +22,7 @@ const app = express()
 /**
  * указываем что проект будет работать с паспортом
  * */
-app.use(passport.initialize())
+// app.use(passport.initialize())
 // middlewarePasport(passport)
 
 /**
@@ -46,10 +46,7 @@ app.use(bodyParser.json())
 /**
  * Для обработки межсетевых запросов
  * */
-app.use(cors({
-  origin: config.corsDomain, // Be sure to switch to your production domain
-  optionsSuccessStatus: 200
-}))
+app.use(cors())
 
 /**
  * Endpoint to check if the API is running
@@ -59,13 +56,8 @@ app.get('/api/status', (req, res) => {
 });
 
 /**
- * Append apollo to our API
+ * Append graphql to our API
  * */
 apollo(app)
-// app.use('/graphql', graphqlHTTP({
-//   schema,
-//   rootValue,
-//   graphiql: true
-// }))
 
 export default app

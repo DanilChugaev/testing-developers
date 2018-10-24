@@ -1,5 +1,6 @@
 import fs from 'fs'
 import path from 'path'
+import merge from 'lodash/merge'
 import {gql, ApolloServer} from 'apollo-server-express'
 
 const Query = gql`
