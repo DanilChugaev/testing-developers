@@ -56,12 +56,12 @@ apollo(app)
 /**
  * Подключаемся к БД
  * */
-app.use(postgraphql(
-  'postgres://username:pgpassword@db:5432/mydatabase',
-  'public',
-  {
-    graphiql: true
-  })
-)
+// app.use(postgraphql(
+//   'postgres://username:pgpassword@db:5432/mydatabase',
+//   'public',
+//   {
+//     graphiql: true
+//   })
+// )
 
 export default app
