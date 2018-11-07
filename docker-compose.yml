@@ -1,0 +1,23 @@
+web:
+  image: node
+  command: npm start
+  ports:
+  - "8000:4242"
+  links:
+  - db
+  working_dir: /src
+  environment:
+    SEQ_DB: mydatabase
+    SEQ_USER: username
+    SEQ_PW: pgpassword
+    PORT: 4242
+    DATABASE_URL: postgres://username:pgpassword@db:5432/mydatabase
+  volumes:
+  - ./:/src
+db:
+  image: postgres
+  ports:
+  - "5432:5432"
+  environment:
+    POSTGRES_USER: username
+    POSTGRES_PASSWORD: pgpassword
