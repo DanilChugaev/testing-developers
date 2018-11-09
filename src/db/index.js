@@ -14,7 +14,7 @@ const sequelize = new Sequelize(dbConfig.database, dbConfig.username, dbConfig.p
   },
 })
 
-const User = require('./entities/User')(sequelize);
+const User = require('./models/User')(sequelize);
 
 sequelize.sync();
 
