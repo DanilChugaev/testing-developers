@@ -3,24 +3,9 @@ import path from 'path'
 import merge from 'lodash/merge'
 import {gql, ApolloServer} from 'apollo-server-express'
 
-const Query = gql`
- type Query {
-   status: String
- }
-`;
-
-const Mutation = gql`
- type Mutation {
-   _empty: String
- }
-`;
-
-let resolvers = {
-  Query: {
-    status: () => 'ok'
-  }
-};
-
+const Query = gql`type Query {status: String}`;
+const Mutation = gql`type Mutation {_empty: String}`;
+let resolvers = {Query: {status: () => 'ok'}};
 const typeDefs = [Query, Mutation];
 
 // Read the current directory and load types and resolvers automatically
@@ -38,7 +23,7 @@ const schema = new ApolloServer({
   playground: {
     endpoint: '/graphql',
     settings: {
-      'editor.theme': 'light',
+      'editor.theme': 'dark',
     }
   }
 })
