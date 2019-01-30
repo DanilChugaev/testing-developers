@@ -1,6 +1,6 @@
-import {env} from './index'
+import config from './index'
 
-const db = require(__dirname + './db.json')[env];
+const db = require(__dirname + '/db.json')[config.env];
 
 const dbConfig = {
   dialect: db.dialect,
@@ -10,7 +10,7 @@ const dbConfig = {
   port: db.port ? db.port : '',
   database: db.database,
   dialectOptions: db.dialectOptions ? db.dialectOptions : {},
-  // connectionString: 'postgres://username:password@db:5432/mydatabase', //example
+  connectionString: `${db.dialect}://${db.username}:${db.password}@${db.host}:${db.port}/${db.database}`, //example
 }
 
 export default dbConfig

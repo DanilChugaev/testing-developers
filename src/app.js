@@ -4,6 +4,7 @@ import cors from 'cors'
 import morgan from 'morgan'
 import postgraphql from 'postgraphql'
 import apollo from './graphql/index'
+import dbConfig from './config/dbConfig'
 // import config from './config/index'
 // import passport from 'passport'
 // import keys from './config/keys'
@@ -45,8 +46,8 @@ app.use(cors())
  * Endpoint to check if the API is running
  * */
 app.get('/api/status', (req, res) => {
-  res.send({ status: 'ok' });
-});
+  res.send({ status: 'ok' })
+})
 
 /**
  * Append graphql to our API
@@ -56,12 +57,12 @@ apollo(app)
 /**
  * Подключаемся к БД
  * */
-// app.use(postgraphql(
-//   'postgres://username:pgpassword@db:5432/mydatabase',
-//   'public',
-//   {
-//     graphiql: true
-//   })
-// )
+app.use(postgraphql(
+  dbConfig.connectionString,
+  'public',
+  {
+    graphiql: true
+  })
+)
 
 export default app
