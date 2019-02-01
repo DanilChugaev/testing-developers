@@ -1,0 +1,17 @@
+language: node_js
+
+node_js:
+  - 'lts/*'
+
+sudo: false
+
+cache:
+  directories:
+    - "node_modules"
+
+script:
+  - echo "simple test"
+
+branches:
+  only:
+    - master
