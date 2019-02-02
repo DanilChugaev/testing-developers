@@ -4,16 +4,10 @@ node_js:
 
 dist: trusty
 sudo: false
-install:
-- npm ci
-
-cache:
-  directories:
-  - "$HOME/.npm"
 
 addons:
   ssh_known_hosts:
-  - 85.143.223.101
+  - 85.143.223.101:22
 
 before_install:
 - openssl aes-256-cbc -K $encrypted_5f1fe41a254e_key -iv $encrypted_5f1fe41a254e_iv
