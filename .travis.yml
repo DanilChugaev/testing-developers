@@ -4,6 +4,12 @@ node_js:
 
 dist: trusty
 sudo: false
+install:
+- npm ci
+
+cache:
+  directories:
+  - "$HOME/.npm"
 
 addons:
   ssh_known_hosts:
