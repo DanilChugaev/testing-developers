@@ -1,24 +1,39 @@
 <template lang="pug">
     v-app
         v-toolbar(app)
-            v-toolbar-title.headline.text-uppercase
-                span Vuetify
-                span.font-weight-light MATERIAL DESIGN
+            v-toolbar-title
+                Logo
 
             v-spacer
 
-            v-btn(flat href='https://github.com/vuetifyjs/vuetify/releases/latest' target='_blank')
-                span.mr-2 Latest Release
-                v-icon mdi-open-in-new
+            v-btn
+                span.mr-2 Enter
+                login-icon
 
         v-content
             router-view
+
+        v-footer.pa-3(app height='auto')
+            v-spacer
+            div &copy; {{ new Date().getFullYear() }}
+            a(
+              href='https://github.com/DanilChugaev/testing-developers'
+              target='_blank'
+            ) GitHub
 </template>
 
 <script>
+import LoginIcon from 'vue-material-design-icons/Login.vue';
+import Logo from './components/Logo/Logo.vue';
 
 export default {
   name: 'App',
+
+  components: {
+    LoginIcon,
+    Logo,
+  },
+
   data() {
     return {
       //

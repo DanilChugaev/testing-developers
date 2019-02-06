@@ -1,0 +1,13 @@
+@import '../../assets/scss/vars';
+
+.logo {
+  display: flex;
+  align-items:center;
+  &__face {
+    height:$logoFaceHeight;
+    margin-right: calc( #{$logoFaceHeight} / 10 );
+  }
+  &__text {
+    height:$logoTextHeight;
+  }
+}
