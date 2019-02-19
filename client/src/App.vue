@@ -1,43 +1,35 @@
 <template lang="pug">
     v-app
-        v-toolbar(app)
-            v-toolbar-title
-                Logo
-
-            v-spacer
-
-            v-btn
-                span.mr-2 Enter
-                login-icon
+        Header
 
         v-content
             router-view
 
-        v-footer.pa-3(app height='auto')
-            v-spacer
-            div &copy; {{ new Date().getFullYear() }}
-            a(
-              href='https://github.com/DanilChugaev/testing-developers'
-              target='_blank'
-            ) GitHub
+        Footer
 </template>
 
 <script>
-import LoginIcon from 'vue-material-design-icons/Login.vue';
-import Logo from './components/Logo/Logo.vue';
+import Header from './components/Header.vue';
+import Footer from './components/Footer.vue';
 
 export default {
   name: 'App',
 
   components: {
-    LoginIcon,
-    Logo,
-  },
-
-  data() {
-    return {
-      //
-    };
+    Header,
+    Footer,
   },
 };
 </script>
+
+<style lang="scss">
+.material-design-icon > .material-design-icon__svg {
+  position: inherit!important;
+  bottom: 0!important;
+}
+.material-design-icon,
+.material-design-icon > .material-design-icon__svg {
+  height: 20px!important;
+  width: 20px!important;
+}
+</style>

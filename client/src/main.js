@@ -6,7 +6,7 @@ import './plugins/vuetify';
 import './registerServiceWorker';
 import 'roboto-fontface/css/roboto/roboto-fontface.css';
 // import '@mdi/font/css/materialdesignicons.css';
-import 'vue-material-design-icons/styles.css';
+// import 'vue-material-design-icons/styles.css';
 
 Vue.config.productionTip = false;
 
