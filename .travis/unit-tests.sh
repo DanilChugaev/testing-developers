@@ -1,3 +1,3 @@
 #!/bin/bash
 
-echo 'unit tests' && return 0
+echo 'unit tests'
