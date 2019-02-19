@@ -17,9 +17,16 @@ before_install:
 - chmod 600 ~/.ssh/deploy_rsa
 - ssh-add ~/.ssh/deploy_rsa
 
-deploy:
-- provider: script
-  skip_cleanup: true
-  script: ".travis/deploy.sh"
-  on:
-    branch: master
+jobs:
+  include:
+    - stage: "Tests"
+    - name: "Unit Tests"
+      script: ".travis/unit-tests.sh"
+    - name: "Integration Tests"
+      script: ".travis/integration-tests.sh"
+    - stage: deploy
+      name: "Deploy to remote server"
+      skip_cleanup: true
+      script: ".travis/deploy.sh"
+    - stage: after_deploy
+      script: ".travis/after_deploy.sh"
