@@ -19,15 +19,11 @@ before_install:
 
 jobs:
   include:
-    - stage: "Tests"
-      if: branch = master
-    - name: "Unit Tests"
-      script: ".travis/unit-tests.sh"
-    - name: "Integration Tests"
-      script: ".travis/integration-tests.sh"
     - stage: deploy
+      if: branch = master
       name: "Deploy to remote server"
       skip_cleanup: true
       script: ".travis/deploy.sh"
     - stage: after_deploy
+      if: branch = master
       script: ".travis/after_deploy.sh"
