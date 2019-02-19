@@ -30,4 +30,4 @@ jobs:
       skip_cleanup: true
       script: ".travis/deploy.sh"
     - stage: after_deploy
-      script: ".travis/after_deploy.sh"
+      bash ".travis/after_deploy.sh"
