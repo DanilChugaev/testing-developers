@@ -1,0 +1,49 @@
+/*переменные*/
+
+/*цвета и тени*/
+$colorHeader: #3A3F51;
+$hoverLight: rgba(255,255,255,0.1);
+$hoverDark: rgba(0,0,0,0.1);
+
+$mainBlue: #0097E0;
+$mainRed: #ff5252;
+$mainGrey: #ccc;
+$secondGrey: #717171;
+/*---*/
+
+/*размеры*/
+$logoFaceHeight: 40px;
+$logoTextHeight: calc( #{$logoFaceHeight} - calc( #{$logoFaceHeight} / 5 ) );
+
+$headerHeight: 64px;
+$mainHeight: calc( 100% - #{$headerHeight});
+/*---*/
+
+/*отступы*/
+$padding: 20px;
+/*---*/
+
+/*тени*/
+$boxShadowMaterial:
+        0 2px 4px -1px rgba(0,0,0,.2),
+        0 4px 5px 0 rgba(0,0,0,.14),
+        0 1px 10px 0 rgba(0,0,0,.12);
+/*---*/
+
+/*миксины*/
+@mixin headerLink() {
+  display: flex;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  text-decoration: none;
+  color: $mainGrey;
+  padding: 0 10px;
+  height:100%;
+  transition: all 0.1s;
+}
+@mixin headerLinkHover() {
+  color: #fff;
+  background-color: $hoverLight;
+}
+/*---*/
