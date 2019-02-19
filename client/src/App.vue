@@ -23,13 +23,11 @@ export default {
 </script>
 
 <style lang="scss">
-.material-design-icon > .material-design-icon__svg {
-  position: inherit!important;
-  bottom: 0!important;
-}
-.material-design-icon,
-.material-design-icon > .material-design-icon__svg {
-  height: 20px!important;
-  width: 20px!important;
-}
+  .material-design-icon,
+  .material-design-icon > .material-design-icon__svg {
+    height: 24px;
+  }
+  .material-design-icon__svg path title {
+    user-select: none;
+  }
 </style>
