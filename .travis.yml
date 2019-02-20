@@ -26,4 +26,5 @@ jobs:
       script: ".travis/deploy.sh"
     - stage: after_deploy
       if: branch = master
+      name: "Start App"
       script: ".travis/after_deploy.sh"

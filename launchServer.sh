@@ -1,3 +1,3 @@
 #!/bin/bash
 
-NODE_ENV=production node src/app.js --exec babel-node
+NODE_ENV=production babel-node src/index.js
