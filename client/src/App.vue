@@ -3,16 +3,30 @@
         Header
 
         v-content
+            div
+              | {{books}}
             router-view
 
         Footer
 </template>
 
 <script>
+import gql from 'graphql-tag';
+
 import Header from './components/Header.vue';
 import Footer from './components/Footer.vue';
 
 export default {
+  apollo: {
+    // Simple query that will update the 'hello' vue property
+    books: gql`query {
+      books {
+        title
+        author
+      }
+    }`,
+  },
+
   name: 'App',
 
   components: {
