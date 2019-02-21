@@ -4,7 +4,7 @@
   "description": "Project for testing developers",
   "main": "src/index.js",
   "scripts": {
-    "start": "pm2 start launchServer.sh",
+    "start": "pm2 restart launchServer.sh",
     "server": "NODE_ENV=development nodemon src/index.js --exec babel-node",
     "debug": "NODE_ENV=development nodemon --inspect src/index.js  --exec babel-node",
     "client-install": "npm install --prefix client",
