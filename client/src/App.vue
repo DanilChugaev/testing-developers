@@ -18,7 +18,6 @@ import Footer from './components/Footer.vue';
 
 export default {
   apollo: {
-    // Simple query that will update the 'hello' vue property
     books: gql`query {
       books {
         title
