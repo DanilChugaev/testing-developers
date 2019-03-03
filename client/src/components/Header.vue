@@ -10,14 +10,14 @@
 
         v-btn.mr-3(
           to="/login"
-          flat
+          text
         )
             span.mr-2 Login
             login-icon
 
         v-btn(
           to="/signup"
-          flat
+          text
         )
             span.mr-2 Sign up
             sign-in-icon
@@ -27,7 +27,7 @@
 import LoginIcon from 'vue-material-design-icons/Login.vue';
 import SignInIcon from 'vue-material-design-icons/AccountPlusOutline.vue';
 
-import Logo from './Logo/Logo.vue';
+import Logo from '@/components/Logo/Logo.vue';
 
 export default {
   name: 'Header',
