@@ -30,13 +30,24 @@
     v-btn(
       :disabled='btnDisabled'
       :loading='sending'
-      @click='submit'
+      @click='submitTest'
     ) {{type}}
 </template>
 
 <script>
+import gql from 'graphql-tag';
+
 export default {
   name: 'LoginForm',
+
+  apollo: {
+    books: gql`query {
+      books {
+        title
+        author
+      }
+    }`,
+  },
 
   props: {
     title: {
@@ -88,6 +99,10 @@ export default {
 
         this.$emit('submit', user);
       }
+    },
+    submitTest() {
+      this.$apollo.queries.books.refetch();
+      console.log(this.books);
     },
   },
 };
