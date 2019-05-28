@@ -2,9 +2,9 @@ const Query = `
  extend type Query {
    books: [Book]
  }
-`
+`;
 
-export const queryTypes = () => [Query]
+export const queryTypes = () => [Query];
 
 export const queryResolvers = {
   Query: {
@@ -19,4 +19,4 @@ export const queryResolvers = {
       },
     ])
   }
-}
+};

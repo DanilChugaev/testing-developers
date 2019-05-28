@@ -1,7 +1,7 @@
-import fs from 'fs'
-import path from 'path'
-import merge from 'lodash/merge'
-import {gql, ApolloServer} from 'apollo-server-express'
+import fs from 'fs';
+import path from 'path';
+import merge from 'lodash/merge';
+import {gql, ApolloServer} from 'apollo-server-express';
 
 const Query = gql`type Query {status: String}`;
 const Mutation = gql`type Mutation {_empty: String}`;
@@ -10,7 +10,7 @@ const typeDefs = [Query, Mutation];
 
 // Read the current directory and load types and resolvers automatically
 fs.readdirSync(__dirname)
-  .filter(dir => (dir.indexOf('.') < 0))
+  .filter(dir => (dir.indexOf('index') < 0))
   .forEach((dir) => {
     const tmp = require(path.join(__dirname, dir)).default; // eslint-disable-line
     resolvers = merge(resolvers, tmp.resolvers);
@@ -26,6 +26,6 @@ const schema = new ApolloServer({
       'editor.theme': 'dark',
     }
   }
-})
+});
 
 export default schema

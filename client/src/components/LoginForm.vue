@@ -1,53 +1,6 @@
-<template lang="pug">
-  v-form.login-form.elevation-3(
-    ref='form'
-    v-model='valid'
-    lazy-validation
-  )
-    h2 {{title}}
-
-    v-text-field(
-      autofocus
-      v-model='email'
-      :rules='emailRules'
-      label='E-mail'
-      required
-      @keyup.enter='submit'
-    )
-
-    v-text-field(
-      v-model='password'
-      :append-icon="show ? 'visibility_off' : 'visibility'"
-      :rules='passwordRules'
-      :counter='10'
-      :type="show ? 'text' : 'password'"
-      label='Password'
-      required
-      @keyup.enter='submit'
-      @click:append="show = !show"
-    )
-
-    v-btn(
-      :disabled='btnDisabled'
-      :loading='sending'
-      @click='submitTest'
-    ) {{type}}
-</template>
-
 <script>
-import gql from 'graphql-tag';
-
 export default {
   name: 'LoginForm',
-
-  apollo: {
-    books: gql`query {
-      books {
-        title
-        author
-      }
-    }`,
-  },
 
   props: {
     title: {
@@ -100,13 +53,45 @@ export default {
         this.$emit('submit', user);
       }
     },
-    submitTest() {
-      this.$apollo.queries.books.refetch();
-      console.log(this.books);
-    },
   },
 };
 </script>
+
+<template lang="pug">
+  v-form.login-form.elevation-3(
+    ref='form'
+    v-model='valid'
+    lazy-validation
+  )
+    h2 {{title}}
+
+    v-text-field(
+      autofocus
+      v-model='email'
+      :rules='emailRules'
+      label='E-mail'
+      required
+      @keyup.enter='submit'
+    )
+
+    v-text-field(
+      v-model='password'
+      :append-icon="show ? 'visibility_off' : 'visibility'"
+      :rules='passwordRules'
+      :counter='10'
+      :type="show ? 'text' : 'password'"
+      label='Password'
+      required
+      @keyup.enter='submit'
+      @click:append="show = !show"
+    )
+
+    v-btn(
+      :disabled='btnDisabled'
+      :loading='sending'
+      @click='submit'
+    ) {{type}}
+</template>
 
 <style scoped>
 .login-form {

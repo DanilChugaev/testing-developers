@@ -1,12 +1,3 @@
-<template lang="pug">
-  login-form.pa-5.mt-5(
-    :title='title'
-    :type='type'
-    :sending='sending'
-    @submit='signup'
-  )
-</template>
-
 <script>
 import LoginForm from '@/components/LoginForm.vue';
 
@@ -32,6 +23,15 @@ export default {
   },
 };
 </script>
+
+<template lang="pug">
+  login-form.pa-5.mt-5(
+    :title='title'
+    :type='type'
+    :sending='sending'
+    @submit='signup'
+  )
+</template>
 
 <style scoped>
 

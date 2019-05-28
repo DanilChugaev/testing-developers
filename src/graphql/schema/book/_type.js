@@ -3,11 +3,11 @@ const Book = `
    title: String!
    author: String!
  }
-`
+`;
 
-export const types = () => [Book]
+export const types = () => [Book];
 
 export const typeResolvers = {
 
-}
+};
 

@@ -2,10 +2,6 @@ import Sequelize from 'sequelize'
 
 export default (sequelize) => {
   const User = sequelize.define('User', {
-    login: {
-      type: Sequelize.STRING,
-      allowNull: false,
-    },
     email: {
       type: Sequelize.STRING,
       allowNull: false,
@@ -18,7 +14,6 @@ export default (sequelize) => {
 
   User.prototype.toUserModel = () => ({
     id: this.id,
-    login: this.login,
     email: this.email,
     password: this.password,
   })
