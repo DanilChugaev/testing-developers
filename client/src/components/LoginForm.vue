@@ -40,6 +40,9 @@ export default {
     btnDisabled() {
       return !this.valid || !this.password.trim() || !this.email.trim();
     },
+    formValidated() {
+      this.$emit('formValidated', this.$refs.authForm.validate());
+    },
   },
 
   methods: {

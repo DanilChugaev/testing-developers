@@ -1,22 +1,42 @@
 import Sequelize from 'sequelize'
 
 export default (sequelize) => {
-  const User = sequelize.define('User', {
-    email: {
-      type: Sequelize.STRING,
-      allowNull: false,
-    },
-    password: {
-      type: Sequelize.STRING,
-      allowNull: false,
-    },
-  })
+    const User = sequelize.define('User',
+        {
+            id: {
+                type: Sequelize.INTEGER,
+                allowNull: false,
+                autoIncrement: true,
+                primaryKey: true,
+                unique: true,
+            },
+            email: {
+                type: Sequelize.STRING,
+                allowNull: false,
+                primaryKey: true,
+                unique: true,
+            },
+            password: {
+                type: Sequelize.STRING,
+                allowNull: false,
+            },
+            token: {
+                type: Sequelize.STRING,
+            },
+        },
+        {
+            underscored: true,
+            freezeTableName: true,
+        },
+    );
 
-  User.prototype.toUserModel = () => ({
-    id: this.id,
-    email: this.email,
-    password: this.password,
-  })
+    User.prototype.toUserModel = function() {
+        return {
+            id: this.id,
+            email: this.email,
+            password: this.password,
+        };
+    };
 
-  return User
+    return User;
 }

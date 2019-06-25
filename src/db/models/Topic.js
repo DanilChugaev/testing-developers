@@ -1,23 +1,29 @@
 import Sequelize from 'sequelize'
 
 export default (sequelize) => {
-  const Topic = sequelize.define('Topic', {
-    tech_id: {
-      type: Sequelize.INTEGER,
-      allowNull: false,
-    },
-    name: {
-      type: Sequelize.STRING,
-      allowNull: false,
-    },
-  })
+    const Topic = sequelize.define('Topic',
+        {
+            tech_id: {
+                type: Sequelize.INTEGER,
+                allowNull: false,
+            },
+            name: {
+                type: Sequelize.STRING,
+                allowNull: false,
+            },
+        },
+        {
+            underscored: true,
+            freezeTableName: true,
+        },
+    );
 
-  // вместо id темы нужно отправлять название
-  Topic.prototype.toTopicModel = () => ({
-    id: this.id,
-    tech_id: this.tech_id,
-    name: this.name,
-  })
+    // вместо id темы нужно отправлять название
+    Topic.prototype.toTopicModel = () => ({
+        id: this.id,
+        tech_id: this.tech_id,
+        name: this.name,
+    });
 
-  return Topic
+    return Topic;
 }

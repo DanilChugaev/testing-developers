@@ -1,7 +1,7 @@
 import Sequelize from 'sequelize'
 
 export default (sequelize) => {
-    const UserQuestion = sequelize.define('UserQuestion',
+    const TopicQuestion = sequelize.define('TopicQuestion',
         {
             id: {
                 type: Sequelize.INTEGER,
@@ -9,28 +9,12 @@ export default (sequelize) => {
                 autoIncrement: true,
                 primaryKey: true,
             },
-            user_id: {
-                type: Sequelize.INTEGER,
-                allowNull: false,
-            },
             question_id: {
                 type: Sequelize.INTEGER,
                 allowNull: false,
             },
-            question_status_id: {
+            topic_id: {
                 type: Sequelize.INTEGER,
-                allowNull: false,
-            },
-            score: {
-                type: Sequelize.INTEGER,
-                allowNull: false,
-            },
-            is_favorite: {
-                type: Sequelize.BOOLEAN,
-                allowNull: false,
-            },
-            is_answered_correct: {
-                type: Sequelize.BOOLEAN,
                 allowNull: false,
             },
         },
@@ -50,5 +34,5 @@ export default (sequelize) => {
     //   is_answered_correct: this.is_answered_correct,
     // })
 
-    return UserQuestion;
+    return TopicQuestion;
 }

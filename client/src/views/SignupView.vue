@@ -1,8 +1,18 @@
 <script>
+import gql from 'graphql-tag';
 import LoginForm from '@/components/LoginForm.vue';
 
 export default {
   name: 'LoginView',
+
+  apollo: {
+    users: gql`mutation {
+      user {
+        email
+        password
+      }
+    }`,
+  },
 
   components: {
     LoginForm,
@@ -18,6 +28,9 @@ export default {
 
   methods: {
     async signup(user) {
+      if (this.$refs.authForm.validate()) {
+      
+      }
       console.log(user);
     },
   },
