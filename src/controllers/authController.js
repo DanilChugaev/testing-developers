@@ -1,12 +1,15 @@
 import { AuthenticationError } from 'apollo-server';
 import jwt from 'jsonwebtoken';
+import bcrypt from 'bcryptjs';
+
+import errorHandler from '../helpers/errorHandler';
 import {
     getUserByEmail,
     createUser,
     editUserById,
 } from './userController';
 
-const randomString = [...Array(10)].map(i=>(~~(Math.random()*36)).toString(36)).join('');
+const getRandomString = () => [...Array(10)].map(i=>(~~(Math.random()*36)).toString(36)).join('');
 
 /**
  * User authorization
@@ -22,22 +25,35 @@ export const authUser = async function(parent, { email, password }, { db }, info
 
     if (candidate) {
         const user = candidate.toUserModel();
+        const passwordComparisonResult = await bcrypt.compare(password, user.password);
 
-        if (user.password !== password) {
-            throw new AuthenticationError('Пароль не совпадает!');
+        if (!passwordComparisonResult) {
+            errorHandler({
+                msg: 'Пароль не совпадает!',
+                type: 'AuthenticationError',
+                level: 'warn',
+                place: 'authUser',
+            });
         }
 
-        user.token = jwt.sign({
+        const token = jwt.sign({
             email,
             password,
-        }, randomString);
+        }, getRandomString());
+
+        user.token = `Bearer ${token}`;
 
         await editUserById(db, user.id, user);
 
         return user;
     }
-    // TODO: создать logger куда посылать ошибки (там подключить сентри)
-    throw new AuthenticationError('Такого пользователя не существует!');
+
+    errorHandler({
+        msg: 'Такого пользователя не существует!',
+        type: 'AuthenticationError',
+        level: 'warn',
+        place: 'authUser',
+    });
 };
 
 /**
@@ -50,21 +66,22 @@ export const authUser = async function(parent, { email, password }, { db }, info
  * @param info
  */
 export const regUser = async function(parent, { email, password }, { db }, info) {
-    let candidate;
-
-    try {
-        candidate = await getUserByEmail(db, email);
-    } catch (e) {
-        console.log(e);
-    }
+    let candidate = await getUserByEmail(db, email);
 
     if (candidate) {
-        throw new AuthenticationError('Такой пользователь уже существует!');
+        errorHandler({
+            msg: 'Такой пользователь уже существует!',
+            type: 'AuthenticationError',
+            level: 'warn',
+            place: 'authUser',
+        });
     }
 
-    try {
-        return await createUser(db, email,password);
-    } catch (e) {
-        console.log(e);
-    }
+    const salt = await bcrypt.genSalt(10);
+    const passwordHash = await bcrypt.hash(password, salt);
+
+    return await createUser(db, email,passwordHash);
 };
+
+// TODO: сделать еще восстановление пароля.
+// TODO: при регистрации проверять емэйл (отправлять письмо на почту)

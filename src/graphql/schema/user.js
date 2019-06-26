@@ -1,8 +1,4 @@
 import {
-    createTempUser,
-    deleteUser,
-} from '../../controllers/userController';
-import {
     authUser,
     regUser,
 } from '../../controllers/authController';
@@ -24,8 +20,6 @@ const Query = `
 const Input = '';
 const Mutation = `
     extend type Mutation {
-        createTempUser(email: String!, password: String!): User!
-        deleteUser(id: ID!): Int!
         authUser(email: String!, password: String!): User!
         regUser(email: String!, password: String!): User!
     }
@@ -45,8 +39,6 @@ export const queryResolvers = {
 };
 const mutationResolvers = {
     Mutation: {
-        createTempUser,
-        deleteUser,
         authUser,
         regUser,
     }
