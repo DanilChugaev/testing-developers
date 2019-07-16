@@ -3,17 +3,33 @@ export default {
   name: 'LoginForm',
 
   props: {
+    /**
+     * Form name
+     */
     title: {
       type: String,
       required: true,
     },
-    type: {
+    /**
+     * Text for submit button
+     */
+    btnText: {
       type: String,
       required: true,
     },
-    sending: {
+    /**
+     *
+     */
+    isSending: {
       type: Boolean,
       required: true,
+    },
+    /**
+     *
+     */
+    shouldRemember: {
+      type: Boolean,
+      default: false,
     },
   },
 
@@ -31,7 +47,7 @@ export default {
         v => !!v || 'E-mail is required',
         v => /.+@.+/.test(v) || 'E-mail must be valid',
       ],
-      checkbox: false,
+      remember: false,
       formSending: false,
     };
   },
@@ -89,17 +105,21 @@ export default {
       @click:append="show = !show"
     )
 
+    v-checkbox(
+      v-if='shouldRemember'
+      v-model='remember'
+      label='Remember me'
+    )
+
     v-btn(
       :disabled='btnDisabled'
-      :loading='sending'
+      :loading='isSending'
       @click='submit'
-    ) {{type}}
+    ) {{btnText}}
 </template>
 
 <style scoped>
 .login-form {
   background-color: #fff;
-  width: 500px;
-  margin: 0 auto;
 }
 </style>

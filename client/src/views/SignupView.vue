@@ -2,17 +2,17 @@
 import gql from 'graphql-tag';
 import LoginForm from '@/components/LoginForm.vue';
 
+const regUser = gql`
+  mutation regUser($email: String!, $password: String!) {
+    regUser(email: $email, password: $password) {
+      id
+      email
+    }
+  }
+`;
+
 export default {
   name: 'LoginView',
-
-  apollo: {
-    users: gql`mutation {
-      user {
-        email
-        password
-      }
-    }`,
-  },
 
   components: {
     LoginForm,
@@ -21,31 +21,43 @@ export default {
   data() {
     return {
       title: 'Registration',
-      type: 'Create an account',
-      sending: false, // for form preloader on submit button
+      btnText: 'Create an account',
+      isSending: false, // for form preloader on submit button
     };
   },
 
   methods: {
-    async signup(user) {
-      if (this.$refs.authForm.validate()) {
-      
+    async signup({ email, password }) {
+      try {
+        const result = await this.$apollo.mutate({
+          mutation: regUser,
+          variables: {
+            email,
+            password,
+          },
+        });
+
+        console.log(result);
+      } catch (error) {
+        console.log(error.toString());
       }
-      console.log(user);
     },
   },
 };
 </script>
 
 <template lang="pug">
-  login-form.pa-5.mt-5(
+  login-form.signup.pa-5.mt-5(
     :title='title'
-    :type='type'
-    :sending='sending'
+    :btnText='btnText'
+    :isSending='isSending'
     @submit='signup'
   )
 </template>
 
 <style scoped>
-
+.signup {
+  width: 500px;
+  margin: 0 auto;
+}
 </style>

@@ -5,14 +5,21 @@ import LoginForm from '@/components/LoginForm.vue';
 export default {
   name: 'LoginView',
 
-  apollo: {
-    users: gql`query {
-      users {
-        email
-        password
-      }
-    }`,
-  },
+  // apollo: {
+  //   user: gql`mutation (
+  //       $email: String!,
+  //       $password: String!
+  //     ){
+  //     authUser(
+  //       email: $email,
+  //       password: $password
+  //     ){
+  //       id
+  //       email
+  //       token
+  //     }
+  //   }`,
+  // },
 
   components: {
     LoginForm,
@@ -21,30 +28,34 @@ export default {
   data() {
     return {
       title: 'Authorization',
-      type: 'Log in',
-      sending: false, // for form preloader on submit button
+      btnText: 'Log in',
+      isSending: false, // for form preloader on submit button
     };
   },
 
   methods: {
     async login(user) {
-      this.$apollo.queries.users.refetch();
-      console.log(this.users);
-      console.log(user);
+      // this.$apollo.queries.user.refetch();
+      // console.log(this.user);
+      // console.log(user);
     },
   },
 };
 </script>
 
 <template lang="pug">
-  login-form.pa-5.mt-5(
+  login-form.login.pa-5.mt-5(
+    :shouldRemember='true'
     :title='title'
-    :type='type'
-    :sending='sending'
+    :btnText='btnText'
+    :isSending='isSending'
     @submit='login'
   )
 </template>
 
 <style scoped>
-
+.login {
+  width: 500px;
+  margin: 0 auto;
+}
 </style>

@@ -5,6 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "server": "NODE_ENV=development nodemon src/index.js --exec babel-node",
+    "bd": "./launchBd.sh",
     "start": "pm2 restart launchServer.sh",
     "debug": "NODE_ENV=development nodemon --inspect src/index.js  --exec babel-node",
     "client-install": "npm install --prefix client",
